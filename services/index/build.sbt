@@ -27,6 +27,7 @@ lazy val VERSION_STTP              = "2.0.0"
 lazy val VERSION_SCALA_ISO         = "0.1.2"
 lazy val VERSION_JODA              = "2.10.6"
 lazy val VERSION_JODA_CONVERT      = "2.2.1"
+lazy val VERSION_TEST_PLAY         = "5.0.0"
 
 lazy val meta = Seq(
   name := """service-il-index""",
@@ -36,8 +37,9 @@ lazy val meta = Seq(
 )
 
 lazy val lib_deps = Seq(
+  // play framework
+  guice,
 // NO 2.13
-//  guice,
 //  "com.softwaremill.sttp"  %% "core"                    % VERSION_STTP,
 //  "com.softwaremill.sttp"  %% "akka-http-backend"       % VERSION_STTP,
 //  "com.vitorsvieira"       %% "scala-iso"               % VERSION_SCALA_ISO,
@@ -46,7 +48,8 @@ lazy val lib_deps = Seq(
 // optional: https://www.scalatest.org/user_guide/using_scalatest_with_sbt
 //  "org.scalatic"           %% "scalactic"               % VERSION_SCALA_TEST,
   "org.scalatest"          %% "scalatest"               % VERSION_SCALA_TEST % "test",
-  "org.scalamock"          %% "scalamock"               % VERSION_SCALA_MOCK % Test
+  "org.scalamock"          %% "scalamock"               % VERSION_SCALA_MOCK % Test,
+  "org.scalatestplus.play" %% "scalatestplus-play"      % VERSION_TEST_PLAY % Test
 )
 
 lazy val root = (project in file("."))

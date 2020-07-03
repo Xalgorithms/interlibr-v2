@@ -1,4 +1,4 @@
-// Copyright (C) 2018 Don Kelly <karfai@gmail.com>
+// Copyright (C) 2020 Don Kelly <karfai@gmail.com>
 
 // This file is part of Interlibr, a functional component of an
 // Internet of Rules (IoR).
@@ -20,5 +20,7 @@
 // You should have received a copy of the GNU Affero General Public
 // License along with this program. If not, see
 // <http://www.gnu.org/licenses/>.
-addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.6.13")
-addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.3.2")
+addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.8.2")
+// used for packing images, like docker
+addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.7.3")
+addSbtPlugin("org.foundweekends.giter8" % "sbt-giter8-scaffold" % "0.11.0")
