@@ -59,8 +59,7 @@ lazy val lib_deps = Seq(
 lazy val root = (project in file("."))
   .settings(meta)
   .settings(libraryDependencies ++= lib_deps)
-// NO 2.13
-//  .enablePlugins(PlayScala)
+  .enablePlugins(PlayService, PlayLayoutPlugin)
   .enablePlugins(JavaAppPackaging)
   .enablePlugins(DockerPlugin)
   .enablePlugins(AshScriptPlugin)
