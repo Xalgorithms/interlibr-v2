@@ -23,11 +23,12 @@
 lazy val VERSION_SCALA             = "2.13.3"
 lazy val VERSION_SCALA_TEST        = "3.2.0"
 lazy val VERSION_SCALA_MOCK        = "4.4.0"
-lazy val VERSION_STTP              = "2.0.0"
+lazy val VERSION_STTP              = "2.2.1"
 lazy val VERSION_SCALA_ISO         = "0.1.2"
 lazy val VERSION_JODA              = "2.10.6"
 lazy val VERSION_JODA_CONVERT      = "2.2.1"
 lazy val VERSION_TEST_PLAY         = "5.0.0"
+lazy val VERSION_AKKA_STREAM       = "2.5.28"
 
 lazy val meta = Seq(
   name := """service-il-index""",
@@ -37,11 +38,14 @@ lazy val meta = Seq(
 )
 
 lazy val lib_deps = Seq(
-  // play framework
+  // https://www.playframework.com/getting-started
   guice,
-// NO 2.13
-//  "com.softwaremill.sttp"  %% "core"                    % VERSION_STTP,
-//  "com.softwaremill.sttp"  %% "akka-http-backend"       % VERSION_STTP,
+//  https://sttp.softwaremill.com/en/latest/quickstart.html
+  "com.softwaremill.sttp.client"  %% "core"              % VERSION_STTP,
+// https://sttp.softwaremill.com/en/latest/backends/akka.html
+  "com.softwaremill.sttp.client"  %% "akka-http-backend" % VERSION_STTP,
+// needed by http/akka ^^
+  "com.typesafe.akka"             %% "akka-stream"       % VERSION_AKKA_STREAM,
 //  "com.vitorsvieira"       %% "scala-iso"               % VERSION_SCALA_ISO,
   "joda-time"              %  "joda-time"               % VERSION_JODA,
   "org.joda"               %  "joda-convert"            % VERSION_JODA_CONVERT,
