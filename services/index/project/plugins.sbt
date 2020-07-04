@@ -20,7 +20,7 @@
 // You should have received a copy of the GNU Affero General Public
 // License along with this program. If not, see
 // <http://www.gnu.org/licenses/>.
-addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.8.2")
 // used for packing images, like docker
+addSbtPlugin("io.spray" % "sbt-revolver" % "0.9.1")
 addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.7.3")
 addSbtPlugin("org.foundweekends.giter8" % "sbt-giter8-scaffold" % "0.11.0")

@@ -28,38 +28,45 @@ lazy val VERSION_SCALA_ISO         = "0.1.2"
 lazy val VERSION_JODA              = "2.10.6"
 lazy val VERSION_JODA_CONVERT      = "2.2.1"
 lazy val VERSION_TEST_PLAY         = "5.0.0"
+lazy val VERSION_AKKA              = "2.6.6"
+lazy val VERSION_AKKA_HTTP         = "10.1.12"
 lazy val VERSION_AKKA_STREAM       = "2.5.28"
 
 lazy val meta = Seq(
-  name := """service-il-index""",
+  name := "service-il-index",
   organization := "org.xalgorithms",
   version := "0.0.1",
   scalaVersion := VERSION_SCALA,
 )
 
 lazy val lib_deps = Seq(
-  // https://www.playframework.com/getting-started
-  guice,
-//  https://sttp.softwaremill.com/en/latest/quickstart.html
-  "com.softwaremill.sttp.client"  %% "core"              % VERSION_STTP,
+  // Akka HTTP
+  "com.typesafe.akka" %% "akka-http"                % VERSION_AKKA_HTTP,
+  "com.typesafe.akka" %% "akka-http-spray-json"     % VERSION_AKKA_HTTP,
+  "com.typesafe.akka" %% "akka-actor-typed"         % VERSION_AKKA,
+  "com.typesafe.akka" %% "akka-stream"              % VERSION_AKKA,
+  "ch.qos.logback"    % "logback-classic"           % "1.2.3",
+  //  https://sttp.softwaremill.com/en/latest/quickstart.html
+  "com.softwaremill.sttp.client"  %% "core"         % VERSION_STTP,
 // https://sttp.softwaremill.com/en/latest/backends/akka.html
-  "com.softwaremill.sttp.client"  %% "akka-http-backend" % VERSION_STTP,
-// needed by http/akka ^^
-  "com.typesafe.akka"             %% "akka-stream"       % VERSION_AKKA_STREAM,
+//  "com.softwaremill.sttp.client"  %% "akka-http-backend" % VERSION_STTP,
 //  "com.vitorsvieira"       %% "scala-iso"               % VERSION_SCALA_ISO,
-  "joda-time"              %  "joda-time"               % VERSION_JODA,
-  "org.joda"               %  "joda-convert"            % VERSION_JODA_CONVERT,
+  "joda-time"              %  "joda-time"           % VERSION_JODA,
+  "org.joda"               %  "joda-convert"        % VERSION_JODA_CONVERT,
+// basic scala test frameworks
+  "org.scalatest"          %% "scalatest"           % VERSION_SCALA_TEST % "test",
+  "org.scalamock"          %% "scalamock"           % VERSION_SCALA_MOCK % Test,
+  "org.scalatestplus.play" %% "scalatestplus-play"  % VERSION_TEST_PLAY % Test,
 // optional: https://www.scalatest.org/user_guide/using_scalatest_with_sbt
 //  "org.scalatic"           %% "scalactic"               % VERSION_SCALA_TEST,
-  "org.scalatest"          %% "scalatest"               % VERSION_SCALA_TEST % "test",
-  "org.scalamock"          %% "scalamock"               % VERSION_SCALA_MOCK % Test,
-  "org.scalatestplus.play" %% "scalatestplus-play"      % VERSION_TEST_PLAY % Test
+// akka additions to testing frameworks
+  "com.typesafe.akka" %% "akka-http-testkit"        % VERSION_AKKA_HTTP % Test,
+  "com.typesafe.akka" %% "akka-actor-testkit-typed" % VERSION_AKKA     % Test
 )
 
 lazy val root = (project in file("."))
   .settings(meta)
   .settings(libraryDependencies ++= lib_deps)
-  .enablePlugins(PlayService, PlayLayoutPlugin)
   .enablePlugins(JavaAppPackaging)
   .enablePlugins(DockerPlugin)
   .enablePlugins(AshScriptPlugin)
