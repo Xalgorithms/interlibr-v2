@@ -30,10 +30,22 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 
+import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+import spray.json.DefaultJsonProtocol
+
+import spray.json.DefaultJsonProtocol
+import spray.json.DeserializationException
+import spray.json.JsString
+import spray.json.JsValue
+import spray.json.RootJsonFormat
+import spray.json.JsValue
+
 import scala.util.Failure
 import scala.util.Success
 
 object Server {
+  import DefaultJsonProtocol._
+
   private def startHttpServer(routes: Route, system: ActorSystem[_]): Unit = {
     // Akka HTTP still needs a classic ActorSystem to start
     implicit val classicSystem: akka.actor.ActorSystem = system.toClassic
@@ -60,6 +72,12 @@ object Server {
       val routes: Route = path("foo") {
         get {
           complete("bar")
+        }
+        post {
+          entity(as[JsValue]) { o =>
+            println(o)
+            complete("")
+          }
         }
       }
 
